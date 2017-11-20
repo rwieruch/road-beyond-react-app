@@ -5,12 +5,13 @@
   "dependencies": {
     "axios": "^0.17.1",
     "firebase": "^4.6.2",
-    "normalizr": "^3.2.4",
     "prop-types": "^15.5.10",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.76.0",
     "styled-components": "^2.2.3"
   },
   "scripts": {

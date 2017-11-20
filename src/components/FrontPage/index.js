@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
 
 import { db } from '../../firebase';
 
@@ -81,13 +82,11 @@ class ReadLaterButton extends Component {
     }
 
     return (
-      <button
-        type="button"
+      <Button
         onClick={() => this.onReadLater(story)}
-        className="button-inline"
       >
         Read Later
-      </button>
+      </Button>
     );
   }
 }
