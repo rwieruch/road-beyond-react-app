@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Input, Button } from 'semantic-ui-react';
 
 import { auth } from '../../firebase';
-
-const PasswordForgetPage = () =>
-  <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
-  </div>
 
 const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -49,15 +44,15 @@ class PasswordForgetForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <Input
+          placeholder="Email Address"
           value={this.state.email}
           onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
         />
-        <button disabled={isInvalid} type="submit">
+
+        <Button disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
+        </Button>
 
         { error && <p>{error.message}</p> }
       </form>
@@ -70,7 +65,7 @@ const PasswordForgetLink = () =>
     <Link to="/pw-forget">Forgot Password?</Link>
   </p>
 
-export default PasswordForgetPage;
+export default PasswordForgetForm;
 
 export {
   PasswordForgetForm,

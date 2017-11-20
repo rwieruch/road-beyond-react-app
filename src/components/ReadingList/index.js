@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Link } from 'react-router-dom';
+import { Loader } from 'semantic-ui-react';
 
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
@@ -26,8 +27,7 @@ class ReadingListPage extends Component {
   render() {
     const { readings } = this.state;
 
-    return [
-      <h1>Readings</h1>,
+    return (
       <Switch>
         <Route
           exact path={routes.READING_LIST}
@@ -39,7 +39,7 @@ class ReadingListPage extends Component {
           component={(props) => <ReadingItem readings={readings} { ...props } />}
         />
       </Switch>
-    ];
+    );
   }
 }
 
@@ -54,15 +54,16 @@ const ReadingItem = ({ readings, match }) =>
   </a>
 
 const ReadingList = ({ readings }) =>
-  readings &&
-  <div>
-    {Object.keys(readings).map(key =>
-      <div key={key}>
-        <Link to={`${routes.READING_LIST}/${key}`}>
-          {readings[key].title}
-        </Link>
-      </div>
-    )}
-  </div>
+  readings
+    ? <div>
+      {Object.keys(readings).map(key =>
+        <div key={key}>
+          <Link to={`${routes.READING_LIST}/${key}`}>
+            {readings[key].title}
+          </Link>
+        </div>
+      )}
+    </div>
+    : <Loader active inline='centered' />
 
 export default withAuthorization(true)(ReadingListPage);

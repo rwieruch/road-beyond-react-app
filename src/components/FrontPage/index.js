@@ -1,49 +1,61 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
+import { Button, List, Icon, Label } from 'semantic-ui-react';
+import styled from 'styled-components';
 
 import { db } from '../../firebase';
 
-const FrontPage = (props) =>
-  <div>
-    <h1>FrontPage</h1>
-    <p>The FrontPage is open to everyone, even though the user isn't signed in.</p>
+const StoryContent = styled.div`
+  margin: 10px;
+  display: flex;
+`;
 
-    <FrontPageList { ...props } />
-  </div>
+const StoryContentItem = styled.div`
+  margin: 0 10px;
+`;
 
-const FrontPageList = ({
+const FrontPage = ({
   stories,
   storiesLoading,
   storiesError,
 }, {
   authUser,
 }) =>
-  <div>
-    {stories && stories.map(story =>
-      <div key={story.objectID} className="table-row">
-        <span style={{ width: '40%' }}>
-          <a href={story.url}>{story.title}</a>
-        </span>
-        <span style={{ width: '30%' }}>
-          {story.author}
-        </span>
-        <span style={{ width: '10%' }}>
-          {story.num_comments}
-        </span>
-        <span style={{ width: '10%' }}>
-          {story.points}
-        </span>
-        <span style={{ width: '10%' }}>
-          { authUser && <ReadLaterButton story={story} authUser={authUser} /> }
-        </span>
-      </div>
-    )}
-  </div>
+  stories &&
+  <List divided relaxed>
+    {stories.map(story =>
+      <List.Item key={story.objectID}>
+        <List.Content>
+          <List.Header as='h4'>
+            <a href={story.url}>{story.title}</a> by {story.author}
+          </List.Header>
 
-FrontPageList.contextTypes = {
-  authUser: PropTypes.object,
-};
+          <List.Description as='div'>
+            <StoryContent>
+              <StoryContentItem>
+                <Label>
+                  Comments
+                  <Label.Detail>{story.num_comments}</Label.Detail>
+                </Label>
+              </StoryContentItem>
+
+              <StoryContentItem>
+                <Label>
+                  Votes
+                  <Label.Detail>{story.points}</Label.Detail>
+                </Label>
+              </StoryContentItem>
+
+              <ReadLaterButton
+                story={story}
+                authUser={authUser}
+              />
+            </StoryContent>
+          </List.Description>
+        </List.Content>
+      </List.Item>
+    )}
+  </List>
 
 class ReadLaterButton extends Component {
   constructor(props) {
@@ -72,23 +84,34 @@ class ReadLaterButton extends Component {
   render() {
     const { story } = this.props;
     const { success, error } = this.state;
+    const { authUser } = this.context;
+
+    if (!authUser) {
+      return null;
+    }
 
     if (success) {
-      return <span>Success</span>;
+      return <span><Icon name="check" /> Saved</span>;
     }
 
     if (error) {
-      return <span>Error</span>;
+      return <span><Icon name="bug" /> Uuups</span>;
     }
 
     return (
       <Button
+        size="mini"
+        primary={true}
         onClick={() => this.onReadLater(story)}
       >
-        Read Later
+        <Icon name="bookmark" /> Read Later
       </Button>
     );
   }
 }
+
+ReadLaterButton.contextTypes = {
+  authUser: PropTypes.object,
+};
 
 export default FrontPage;

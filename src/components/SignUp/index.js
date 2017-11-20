@@ -3,15 +3,10 @@ import {
   Link,
   withRouter,
 } from 'react-router-dom';
+import { Input, Button } from 'semantic-ui-react';
 
 import { auth, db } from '../../firebase';
 import * as routes from '../../constants/routes';
-
-const SignUpPage = ({ history }) =>
-  <div>
-    <h1>SignUp</h1>
-    <SignUpForm history={history} />
-  </div>
 
 const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -80,33 +75,33 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <Input
           value={username}
           onChange={event => this.setState(updateByPropertyName('username', event.target.value))}
           type="text"
           placeholder="Full Name"
         />
-        <input
+        <Input
           value={email}
           onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Input
           value={passwordOne}
           onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
           type="password"
           placeholder="Password"
         />
-        <input
+        <Input
           value={passwordTwo}
           onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
           type="password"
           placeholder="Confirm Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <Button disabled={isInvalid} type="submit">
           Sign Up
-        </button>
+        </Button>
 
         { error && <p>{error.message}</p> }
       </form>
@@ -121,7 +116,7 @@ const SignUpLink = () =>
     <Link to="/signup">Sign Up</Link>
   </p>
 
-export default withRouter(SignUpPage);
+export default withRouter(SignUpForm);
 
 export {
   SignUpForm,

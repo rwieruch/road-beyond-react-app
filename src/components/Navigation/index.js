@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 import SignOutButton from '../SignOut';
 import * as routes from '../../constants/routes';
@@ -18,17 +19,31 @@ Navigation.contextTypes = {
 };
 
 const NavigationAuth = () =>
-  <ul>
-    <li><Link to={routes.FRONTPAGE}>Front Page</Link></li>
-    <li><Link to={routes.READING_LIST}>Reading List</Link></li>
-    <li><Link to={routes.ACCOUNT}>Account</Link></li>
-    <li><SignOutButton /></li>
-  </ul>
+  <Menu secondary>
+    <Menu.Item>
+      <Link to={routes.FRONTPAGE}>Front Page</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={routes.READING_LIST}>Reading List</Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to={routes.ACCOUNT}>Account</Link>
+    </Menu.Item>
+
+    <Menu.Item position='right'>
+      <SignOutButton />
+    </Menu.Item>
+  </Menu>
 
 const NavigationNonAuth = () =>
-  <ul>
-    <li><Link to={routes.FRONTPAGE}>Front Page</Link></li>
-    <li><Link to={routes.SIGN_IN}>Sign In</Link></li>
-  </ul>
+  <Menu secondary>
+    <Menu.Item>
+      <Link to={routes.FRONTPAGE}>Front Page</Link>
+    </Menu.Item>
+
+    <Menu.Item position='right'>
+      <Link to={routes.SIGN_IN}>Sign In</Link>
+    </Menu.Item>
+  </Menu>
 
 export default Navigation;

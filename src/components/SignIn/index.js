@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Input, Button } from 'semantic-ui-react';
 
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
@@ -8,7 +9,6 @@ import * as routes from '../../constants/routes';
 
 const SignInPage = ({ history }) =>
   <div>
-    <h1>SignIn</h1>
     <SignInForm history={history} />
     <PasswordForgetLink />
     <SignUpLink />
@@ -66,21 +66,21 @@ class SignInForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <Input
           value={email}
           onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Input
           value={password}
           onChange={event => this.setState(updateByPropertyName('password', event.target.value))}
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <Button disabled={isInvalid} type="submit">
           Sign In
-        </button>
+        </Button>
 
         { error && <p>{error.message}</p> }
       </form>

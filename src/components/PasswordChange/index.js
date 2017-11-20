@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Input, Button } from 'semantic-ui-react';
 
 import { auth } from '../../firebase';
 
@@ -46,21 +47,21 @@ class PasswordChangeForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <Input
           value={passwordOne}
           onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
           type="password"
           placeholder="New Password"
         />
-        <input
+        <Input
           value={passwordTwo}
           onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
           type="password"
           placeholder="Confirm New Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <Button disabled={isInvalid} type="submit">
           Reset My Password
-        </button>
+        </Button>
 
         { error && <p>{error.message}</p> }
       </form>
