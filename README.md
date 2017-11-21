@@ -1,14 +1,15 @@
-# react-firebase-authentication
+# The Road beyond React (Application)
 
-* Found in [Taming the State in React](https://roadtoreact.com/course-details?courseId=TAMING_THE_STATE)
-* [Live](https://react-firebase-authentication.wieruch.com/)
+* Found in [the Road beyond React](https://www.roadtolearnreact.com/)
 
 ## Features
 
 * uses:
   * only React (create-react-app)
-  * firebase 4.3.1
-  * react-router 4.2.0
+  * firebase
+  * react-router 4
+  * semantic-ui
+  * styled-components
   * no Redux/MobX
 * features:
   * Sign In
@@ -17,16 +18,16 @@
   * Password Forget
   * Password Change
   * Protected Routes with Authorization
-  * Database: Users
+  * Database: Users, Stories
 
 ## Installation
 
-* `git clone git@github.com:rwieruch/react-firebase-authentication.git`
-* `cd react-firebase-authentication`
+* `git clone git@github.com:rwieruch/road-beyond-react-app.git`
+* `cd road-beyond-react-app`
 * `npm install`
 * `npm start`
 * visit http://localhost:3000/
-* Use your own Firebase Credentials
+* use your own Firebase Credentials
 
 ### Use your own Firebase Credentials
 
