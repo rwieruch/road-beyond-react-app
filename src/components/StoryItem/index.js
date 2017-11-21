@@ -29,12 +29,17 @@ const StoryItem = ({
 
       <List.Description as="div">
         <List.Header as="h4">
+          {isFrontPage && <ReadLaterButton
+            story={story}
+            authUser={authUser}
+          />}
+
           <a href={story.url}>
             {story.title}
           </a>
         </List.Header>
 
-        <StoryRow>
+        {isReadingsPage && <StoryRow>
           <StoryContentItem>
             <Label>
               Comments
@@ -55,16 +60,11 @@ const StoryItem = ({
             </Label>
           </StoryContentItem>
 
-          {isFrontPage && <ReadLaterButton
+          <DismissButton
             story={story}
             authUser={authUser}
-          />}
-
-          {isReadingsPage && <DismissButton
-            story={story}
-            authUser={authUser}
-          />}
-        </StoryRow>
+          />
+        </StoryRow>}
       </List.Description>
     </List.Content>
   </List.Item>
@@ -113,11 +113,12 @@ class ReadLaterButton extends Component {
 
     return (
       <Button
+        icon
         size="mini"
         primary={true}
         onClick={() => this.onReadLater(story , authUser)}
       >
-        <Icon name="bookmark" /> Read Later
+        <Icon name="bookmark" />
       </Button>
     );
   }

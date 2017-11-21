@@ -26,6 +26,8 @@ class Comments extends Component {
   componentDidMount() {
     const { objectID } = this.props.story;
 
+    this.setState({ storyLoading: true });
+
     axios(`http://hn.algolia.com/api/v1/items/${objectID}`)
       .then(result => this.setState({
         story: result.data,
