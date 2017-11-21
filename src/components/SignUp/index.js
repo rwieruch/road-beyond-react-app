@@ -5,12 +5,9 @@ import {
 } from 'react-router-dom';
 import { Input, Button } from 'semantic-ui-react';
 
+import Form from '../Form';
 import { auth, db } from '../../firebase';
 import * as routes from '../../constants/routes';
-
-const updateByPropertyName = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
 
 const INITIAL_STATE = {
   username: '',
@@ -48,12 +45,12 @@ class SignUpForm extends Component {
             history.push(routes.READING_LIST);
           })
           .catch(error => {
-            this.setState(updateByPropertyName('error', error));
+            this.setState(() => ({ error }));
           });
 
       })
       .catch(error => {
-        this.setState(updateByPropertyName('error', error));
+        this.setState(() => ({ error }));
       });
 
     event.preventDefault();
@@ -74,28 +71,28 @@ class SignUpForm extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Input
           value={username}
-          onChange={event => this.setState(updateByPropertyName('username', event.target.value))}
+          onChange={event => this.setState({ username: event.target.value })}
           type="text"
           placeholder="Full Name"
         />
         <Input
           value={email}
-          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+          onChange={event => this.setState({ email: event.target.value })}
           type="text"
           placeholder="Email Address"
         />
         <Input
           value={passwordOne}
-          onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
+          onChange={event => this.setState({ passwordOne: event.target.value })}
           type="password"
           placeholder="Password"
         />
         <Input
           value={passwordTwo}
-          onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
+          onChange={event => this.setState({ passwordTwo: event.target.value })}
           type="password"
           placeholder="Confirm Password"
         />
@@ -104,7 +101,7 @@ class SignUpForm extends Component {
         </Button>
 
         { error && <p>{error.message}</p> }
-      </form>
+      </Form>
     );
   }
 }

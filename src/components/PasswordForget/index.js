@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Button } from 'semantic-ui-react';
 
+import Form from '../Form';
 import { auth } from '../../firebase';
-
-const updateByPropertyName = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
 
 const INITIAL_STATE = {
   email: '',
@@ -28,7 +25,7 @@ class PasswordForgetForm extends Component {
         this.setState(() => ({ ...INITIAL_STATE }));
       })
       .catch(error => {
-        this.setState(updateByPropertyName('error', error));
+        this.setState(() => ({ error }));
       });
 
     event.preventDefault();
@@ -43,19 +40,19 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Input
           placeholder="Email Address"
           value={this.state.email}
-          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+          onChange={event => this.setState({ email: event.target.value })}
         />
 
         <Button disabled={isInvalid} type="submit">
-          Reset My Password
+          Reset Password
         </Button>
 
         { error && <p>{error.message}</p> }
-      </form>
+      </Form>
     );
   }
 }

@@ -7,7 +7,6 @@ import withAuthorization from '../Session/withAuthorization';
 
 const AccountPage = (props, context) =>
   <div>
-    <p>Account: {context.authUser.email}</p>
     <PasswordForgetForm />
     <PasswordChangeForm />
   </div>

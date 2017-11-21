@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'semantic-ui-react';
 
+import Form from '../Form';
 import { auth } from '../../firebase';
-
-const updateByPropertyName = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
 
 const INITIAL_STATE = {
   passwordOne: '',
@@ -28,7 +25,7 @@ class PasswordChangeForm extends Component {
         this.setState(() => ({ ...INITIAL_STATE }));
       })
       .catch(error => {
-        this.setState(updateByPropertyName('error', error));
+        this.setState(() => ({ error }));
       });
 
     event.preventDefault();
@@ -46,25 +43,25 @@ class PasswordChangeForm extends Component {
       passwordOne === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Input
           value={passwordOne}
-          onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
+          onChange={event => this.setState(() => ({ passwordOne: event.target.value }))}
           type="password"
           placeholder="New Password"
         />
         <Input
           value={passwordTwo}
-          onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
+          onChange={event => this.setState(() => ({ passwordTwo: event.target.value }))}
           type="password"
           placeholder="Confirm New Password"
         />
         <Button disabled={isInvalid} type="submit">
-          Reset My Password
+          Change Password
         </Button>
 
         { error && <p>{error.message}</p> }
-      </form>
+      </Form>
     );
   }
 }

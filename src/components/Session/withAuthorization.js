@@ -16,7 +16,9 @@ const withAuthorization = (needsAuthorization) => (Component) => {
     }
 
     render() {
-      return this.context.authUser ? <Component /> : null;
+      return this.context.authUser
+        ? <Component { ...this.props } />
+        : null;
     }
   }
 
