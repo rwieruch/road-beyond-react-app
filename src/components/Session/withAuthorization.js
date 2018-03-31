@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
+import AuthUserContext from './AuthUserContext';
 import { firebase } from '../../firebase';
 import * as routes from '../../constants/routes';
 
@@ -16,15 +16,16 @@ const withAuthorization = (needsAuthorization) => (Component) => {
     }
 
     render() {
-      return this.context.authUser
-        ? <Component { ...this.props } />
-        : null;
+      return (
+        <AuthUserContext.Consumer>
+          {authUser => authUser
+            ? <Component { ...this.props } />
+            : null
+          }
+        </AuthUserContext.Consumer>
+      );
     }
   }
-
-  WithAuthorization.contextTypes = {
-    authUser: PropTypes.object,
-  };
 
   return withRouter(WithAuthorization);
 }

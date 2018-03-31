@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { Loader, List } from 'semantic-ui-react';
 
@@ -43,10 +42,6 @@ const ReadingListPage = ({
     </Switch>
   );
 }
-
-ReadingListPage.contextTypes = {
-  authUser: PropTypes.object,
-};
 
 const ReadingItem = ({
   readings,

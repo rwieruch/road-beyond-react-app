@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Button, List, Icon, Label } from 'semantic-ui-react';
 import styled from 'styled-components';
 
+import AuthUserContext from '../Session/AuthUserContext';
 import * as routes from '../../constants/routes';
 import { db } from '../../firebase';
 
@@ -21,57 +21,54 @@ const StoryItem = ({
   story,
   isFrontPage,
   isReadingsPage,
-}, {
-  authUser,
 }) =>
   <List.Item>
     <List.Content>
+      <AuthUserContext.Consumer>
+      {authUser =>
+        <List.Description as="div">
+          <List.Header as="h4">
+            {isFrontPage && <ReadLaterButton
+              story={story}
+              authUser={authUser}
+            />}
 
-      <List.Description as="div">
-        <List.Header as="h4">
-          {isFrontPage && <ReadLaterButton
-            story={story}
-            authUser={authUser}
-          />}
+            <a href={story.url}>
+              {story.title}
+            </a>
+          </List.Header>
 
-          <a href={story.url}>
-            {story.title}
-          </a>
-        </List.Header>
+          {isReadingsPage && <StoryRow>
+            <StoryContentItem>
+              <Label>
+                Comments
+                <Label.Detail>
+                  <Link to={`${routes.READING_LIST}/${story.objectID}`}>
+                    {story.num_comments}
+                  </Link>
+                </Label.Detail>
+              </Label>
+            </StoryContentItem>
 
-        {isReadingsPage && <StoryRow>
-          <StoryContentItem>
-            <Label>
-              Comments
-              <Label.Detail>
-                <Link to={`${routes.READING_LIST}/${story.objectID}`}>
-                  {story.num_comments}
-                </Link>
-              </Label.Detail>
-            </Label>
-          </StoryContentItem>
+            <StoryContentItem>
+              <Label>
+                Votes
+                <Label.Detail>
+                  {story.points}
+                </Label.Detail>
+              </Label>
+            </StoryContentItem>
 
-          <StoryContentItem>
-            <Label>
-              Votes
-              <Label.Detail>
-                {story.points}
-              </Label.Detail>
-            </Label>
-          </StoryContentItem>
-
-          <DismissButton
-            story={story}
-            authUser={authUser}
-          />
-        </StoryRow>}
-      </List.Description>
+            <DismissButton
+              story={story}
+              authUser={authUser}
+            />
+          </StoryRow>}
+        </List.Description>
+      }
+      </AuthUserContext.Consumer>
     </List.Content>
   </List.Item>
-
-StoryItem.contextTypes = {
-  authUser: PropTypes.object,
-};
 
 class ReadLaterButton extends Component {
   constructor(props) {
