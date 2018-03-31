@@ -1,22 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 
+import AuthUserContext from '../Session/AuthUserContext';
 import SignOutButton from '../SignOut';
 import * as routes from '../../constants/routes';
 
-const Navigation = (props, context) =>
-  <div>
-    {context.authUser
+const Navigation = (props) =>
+  <AuthUserContext.Consumer>
+    {authUser => authUser
       ? <NavigationAuth />
       : <NavigationNonAuth />
     }
-  </div>
-
-Navigation.contextTypes = {
-  authUser: PropTypes.object,
-};
+  </AuthUserContext.Consumer>
 
 const NavigationAuth = () =>
   <Menu secondary>
