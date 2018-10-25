@@ -4,14 +4,14 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "firebase": "^4.12.1",
+    "firebase": "^5.5.5",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
+    "react-scripts": "2.0.5",
     "semantic-ui-css": "^2.3.1",
-    "semantic-ui-react": "^0.79.0",
-    "styled-components": "^3.2.5"
+    "semantic-ui-react": "^0.83.0",
+    "styled-components": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
