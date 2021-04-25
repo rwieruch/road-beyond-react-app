@@ -1,6 +1,6 @@
 # The Road beyond React (Application)
 
-[![Build Status](https://travis-ci.org/rwieruch/road-beyond-react-app.svg?branch=master)](https://travis-ci.org/rwieruch/road-beyond-react-app) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/)
+[![Build Status](https://travis-ci.org/rwieruch/road-beyond-react-app.svg?branch=master)](https://travis-ci.org/rwieruch/road-beyond-react-app) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/rwieruch/road-beyond-react-app.svg)](https://greenkeeper.io/)
 
 A Hacker News / Pocket clone which let's you save front page stories for later. Found in [the Road beyond React](https://www.roadtolearnreact.com/).
 
